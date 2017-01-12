@@ -56,13 +56,16 @@ class ConfigurableProductHandler
      */
     public function afterGetMatchingProductIds(Rule $rule, array $productIds)
     {
-        $linkProductIds = $this->_configurableProductsProvider->getLinkIds(array_keys($productIds));       
-        foreach ($linkProductIds as $productId => $parentId) {
-            if (!isset($this->_parentProducts[$parentId])) {
+        $parentProductIds = $this->_configurableProductsProvider
+			->getParentIds(array_keys($productIds)); 
+			      
+        foreach ($parentProductIds as $productId => $parentId) {
+            if ($parentId!== null && !isset($this->_parentProducts[$parentId])) {
                 $this->_parentProducts[$parentId] = 1;
             }
             unset($productIds[$productId]);
-        }           
+        } 
+      
         return array_replace($productIds, $this->_parentProducts);
     }
 } 
