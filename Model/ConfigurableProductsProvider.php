@@ -37,7 +37,7 @@ class ConfigurableProductsProvider
     /**
      * @var array
      */
-    private $productIds = [];
+    private $_productIds = [];
 
     /**
      * @param \Magento\Framework\App\ResourceConnection $resource
@@ -57,7 +57,7 @@ class ConfigurableProductsProvider
     public function getLinkIds(array $ids)
     {
         $key =  md5(json_encode($ids));
-        if (!isset($this->productIds[$key])) {
+        if (!isset($this->_productIds[$key])) {
             $connection = $this->_resource->getConnection();           
 			$select = $connection
 				->select()
@@ -74,8 +74,8 @@ class ConfigurableProductsProvider
 				)                                        
 				->where('p.type_id = ?', Configurable::TYPE_CODE)
 				->where('e.entity_id IN (?)', $ids);            
-            $this->productIds[$key] = $connection->fetchPairs($select);
+            $this->_productIds[$key] = $connection->fetchPairs($select);
         }
-        return $this->productIds[$key];
+        return $this->_productIds[$key];
     }
 }

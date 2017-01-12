@@ -58,11 +58,11 @@ class ConfigurableProductHandler
     {
         $linkProductIds = $this->_configurableProductsProvider->getLinkIds(array_keys($productIds));       
         foreach ($linkProductIds as $productId => $parentId) {
-            if (!isset($this->parentProducts[$parentId])) {
-                $this->parentProducts[$parentId] = 1;
+            if (!isset($this->_parentProducts[$parentId])) {
+                $this->_parentProducts[$parentId] = 1;
             }
             unset($productIds[$productId]);
         }           
-        return array_replace($productIds, $this->parentProducts);
+        return array_replace($productIds, $this->_parentProducts);
     }
 } 
