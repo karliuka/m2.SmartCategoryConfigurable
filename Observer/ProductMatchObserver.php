@@ -38,8 +38,9 @@ class ProductMatchObserver implements ObserverInterface
     public function execute(Observer $observer)
     {		
 		$rule = $observer->getEvent()->getRule();
-		$rule->setVisibilityFilter(false);
-
+		if ($rule->getCategory()->getReplaceOnConfigurable()) {
+			$rule->setVisibilityFilter(false);			
+		}
         return $this;
     }
 }  

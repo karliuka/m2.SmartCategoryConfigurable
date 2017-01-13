@@ -28,5 +28,11 @@
 	-->	    
     <event name="faonni_smartcategory_product_collection_match_before">
         <observer name="faonni_smart_category_configurable" instance="Faonni\SmartCategoryConfigurable\Observer\ProductMatchObserver" />
-    </event>            
+    </event>
+	<!--
+	event faonni_smartcategory_rule_save_before
+	-->	    
+    <event name="faonni_smartcategory_rule_save_before">
+        <observer name="faonni_smart_category_configurable" instance="Faonni\SmartCategoryConfigurable\Observer\RuleSaveObserver" />
+    </event>    
 </config>

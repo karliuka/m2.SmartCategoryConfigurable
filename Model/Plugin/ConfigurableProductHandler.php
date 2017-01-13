@@ -56,6 +56,10 @@ class ConfigurableProductHandler
      */
     public function afterGetMatchingProductIds(Rule $rule, array $productIds)
     {
+        if (!$rule->getCategory()->getReplaceOnConfigurable()) {
+			return $productIds;
+		}
+        
         $displayIds = $this->_configurableProductsProvider
 			->getDisplayIds(array_keys($productIds)); 
 			      
