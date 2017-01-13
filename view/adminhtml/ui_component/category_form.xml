@@ -35,7 +35,7 @@
 						<item name="source" xsi:type="string">category_form</item>
 						<item name="prefer" xsi:type="string">toggle</item>
 						<item name="label" xsi:type="string" translate="true">Replace on Configurable</item>
-						<item name="notice" xsi:type="string" translate="true">Replace the associated products (Not Visible Individually) on configurable product</item>
+						<item name="notice" xsi:type="string" translate="true">Replace the associated products (Not Visible Individually) on corresponding configurable product</item>
 						<item name="scopeLabel" xsi:type="string">[GLOBAL]</item>
 						<item name="valueMap" xsi:type="array">
 							<item name="true" xsi:type="string">1</item>

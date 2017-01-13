@@ -93,7 +93,7 @@ class UpgradeData implements UpgradeDataInterface
 				'sort_order' => 20,
 				'default' => '1',				
 				'group' => 'Products in Category',
-				'note' => 'Replace the associated products (Not Visible Individually) on configurable product',
+				'note' => 'Replace the associated products (Not Visible Individually) on corresponding configurable product',
             ]
         );  
     }	
