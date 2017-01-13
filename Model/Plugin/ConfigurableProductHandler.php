@@ -37,7 +37,7 @@ class ConfigurableProductHandler
     /**
      * @var array
      */
-    private $_parentProducts = [];
+    private $_products = [];
 
     /**
      * @param \Faonni\SmartCategoryConfigurable\Model\ConfigurableProductsProvider $configurableProductsProvider
@@ -56,16 +56,18 @@ class ConfigurableProductHandler
      */
     public function afterGetMatchingProductIds(Rule $rule, array $productIds)
     {
-        $parentProductIds = $this->_configurableProductsProvider
-			->getParentIds(array_keys($productIds)); 
+        $displayIds = $this->_configurableProductsProvider
+			->getDisplayIds(array_keys($productIds)); 
 			      
-        foreach ($parentProductIds as $productId => $parentId) {
-            if ($parentId!== null && !isset($this->_parentProducts[$parentId])) {
-                $this->_parentProducts[$parentId] = 1;
-            }
-            unset($productIds[$productId]);
+        foreach ($displayIds as $productId => $displayId) {
+			if ($displayId !== null) {
+				if ($displayId == 0) {
+					$this->_products[$productId] = 1;
+				} elseif (!isset($this->_products[$displayId])) {
+					$this->_products[$displayId] = 1;					
+				}
+			}           
         } 
-      
-        return array_replace($productIds, $this->_parentProducts);
+        return $this->_products;
     }
 } 

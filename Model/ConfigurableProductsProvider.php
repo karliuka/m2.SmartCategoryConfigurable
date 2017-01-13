@@ -24,6 +24,7 @@ namespace Faonni\SmartCategoryConfigurable\Model;
 use Magento\Framework\App\ResourceConnection;
 use Magento\ConfigurableProduct\Model\Product\Type\Configurable;
 use Magento\Catalog\Model\Product\Visibility;
+use Magento\Catalog\Model\Product;
 use Magento\Catalog\Model\Config;
 
 /**
@@ -69,46 +70,73 @@ class ConfigurableProductsProvider
     }
 
     /**
-     * Retrieve parent products pairs ids
+     * Retrieve display products pairs ids
      * 
      * @param array $ids
      * @return array
      */
-    public function getParentIds(array $ids)
+    public function getDisplayIds(array $ids)
     {
-        $key = md5(json_encode($ids));
-        
+        $key = md5(json_encode($ids));       
         if (!isset($this->_productIds[$key])) {
-			
-            $visibilityAttributeId = $this->_config->getAttribute(
-                \Magento\Catalog\Model\Product::ENTITY,
-                'visibility'
-            )->getId();			
-
             $connection = $this->_resource->getConnection();           
 			$select = $connection
 				->select()
-				->from(['e' => $this->_resource->getTableName('catalog_product_entity')], ['e.entity_id'])
-				->join(
+				->from(
+					['e' => $this->_resource->getTableName('catalog_product_entity')], 
+					['e.entity_id', 'display_id' => new \Zend_Db_Expr('IF(c.value_id, p.entity_id, IF(s.entity_id, 0, NULL))')]
+				)
+				->joinLeft(
 					['l' => $this->_resource->getTableName('catalog_product_super_link')],
 					'l.product_id=e.entity_id', 
 					[]
 				)  				                  
-				->join(
+				->joinLeft(
 					['p' => $this->_resource->getTableName('catalog_product_entity')],
 					'l.parent_id=p.entity_id', 
-					['parent_id' => new \Zend_Db_Expr('IF(i.value_id, p.entity_id, NULL)')]
+					[]
 				) 
 				->joinLeft(
-					['i' => $this->_resource->getTableName('catalog_product_entity_int')],
-					'i.entity_id=p.entity_id AND i.store_id="0" AND i.attribute_id="' . $visibilityAttributeId . '" AND i.value IN(' . implode(',', $this->_catalogProductVisibility->getVisibleInSiteIds()) . ')', 
+					['c' => $this->_resource->getTableName('catalog_product_entity_int')],
+					join(
+						' AND ',
+						[
+							'c.entity_id = p.entity_id',
+							'c.store_id = "0"',
+							$connection->quoteInto('p.type_id = ?', Configurable::TYPE_CODE),
+							$connection->quoteInto('c.attribute_id = ?', $this->getVisibilityAttributeId()),
+							$connection->quoteInto('c.value IN(?)', $this->_catalogProductVisibility->getVisibleInSiteIds())
+						]
+					),					
 					[]
-				) 				                       
-				->where('p.type_id = ?', Configurable::TYPE_CODE)
-				->where('e.entity_id IN (?)', $ids);            
+				) 
+				->joinLeft(
+					['s' => $this->_resource->getTableName('catalog_product_entity_int')],
+					join(
+						' AND ',
+						[
+							new \Zend_Db_Expr('c.value_id IS NULL'),
+							's.entity_id = e.entity_id',
+							's.store_id = "0"',
+							$connection->quoteInto('s.attribute_id = ?', $this->getVisibilityAttributeId()),
+							$connection->quoteInto('s.value IN(?)', $this->_catalogProductVisibility->getVisibleInSiteIds())
+						]
+					),					
+					[]
+				) 
+				->where('e.entity_id IN (?)', $ids); 	
             $this->_productIds[$key] = $connection->fetchPairs($select);
-        }
-        
+        }        
         return $this->_productIds[$key];
     }
+	
+    /**
+     * Retrieve visibility attribute id
+     * 
+     * @return int
+     */
+    public function getVisibilityAttributeId()
+    {
+        return $this->_config->getAttribute(Product::ENTITY, 'visibility')->getId();	
+    }	
 }
