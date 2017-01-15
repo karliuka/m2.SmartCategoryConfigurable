@@ -1,5 +1,4 @@
-<?xml version="1.0"?>
-<!--
+<?php
 /**
  * Faonni
  *  
@@ -20,12 +19,29 @@
  * @copyright   Copyright (c) 2017 Karliuka Vitalii(karliuka.vitalii@gmail.com) 
  * @license     http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
  */
--->
-<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
-	xsi:noNamespaceSchemaLocation="../../../../../lib/internal/Magento/Framework/Module/etc/module.xsd">
-    <module name="Faonni_SmartCategoryConfigurable" setup_version="2.0.5">
-        <sequence>
-            <module name="Faonni_SmartCategory"/>
-        </sequence>
-    </module>		
-</config>
+namespace Faonni\SmartCategoryConfigurable\Observer;
+
+use Magento\Framework\Event\Observer;
+use Magento\Framework\Event\ObserverInterface;
+
+/**
+ * Rule save observer
+ */
+class RuleSaveObserver implements ObserverInterface
+{	
+    /**
+     * Handler for rule save event
+     *
+     * @param Observer $observer
+     * @return void
+     */
+    public function execute(Observer $observer)
+    {		
+		$rule = $observer->getEvent()->getRule();
+		$rule->setReplaceOnConfigurable(
+			$rule->getCategory()->getReplaceOnConfigurable()
+		);
+        return $this;
+    }
+}  
+ 
