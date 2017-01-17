@@ -35,11 +35,6 @@ class ConfigurableProductHandler
     private $_configurableProductsProvider;
 
     /**
-     * @var array
-     */
-    private $_products = [];
-
-    /**
      * @param \Faonni\SmartCategoryConfigurable\Model\ConfigurableProductsProvider $configurableProductsProvider
      */
     public function __construct(
@@ -63,16 +58,17 @@ class ConfigurableProductHandler
         
         $displayIds = $this->_configurableProductsProvider
 			->getDisplayIds(array_keys($productIds)); 
-			      
+			
+		$products = [];	      
         foreach ($displayIds as $productId => $displayId) {
 			if ($displayId !== null) {
 				if ($displayId == 0) {
-					$this->_products[$productId] = 1;
-				} elseif (!isset($this->_products[$displayId])) {
-					$this->_products[$displayId] = 1;					
+					$products[$productId] = 1;
+				} elseif (!isset($products[$displayId])) {
+					$products[$displayId] = 1;					
 				}
 			}           
         } 
-        return $this->_products;
+        return $products;
     }
 } 
