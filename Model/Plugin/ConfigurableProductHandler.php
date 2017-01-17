@@ -56,7 +56,8 @@ class ConfigurableProductHandler
      */
     public function afterGetMatchingProductIds(Rule $rule, array $productIds)
     {
-        if (!$rule->getCategory()->getReplaceOnConfigurable()) {
+        $object = $rule->getCategory() ?: $rule;
+		if (!$object->getReplaceOnConfigurable()) {
 			return $productIds;
 		}
         
