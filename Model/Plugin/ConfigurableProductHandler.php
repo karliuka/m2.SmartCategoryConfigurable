@@ -30,12 +30,16 @@ use Faonni\SmartCategoryConfigurable\Model\ConfigurableProductsProvider;
 class ConfigurableProductHandler
 {
     /** 
+     * ConfigurableProducts Provider
+     * 	
      * @var \Faonni\SmartCategoryConfigurable\Model\ConfigurableProductsProvider
      */
-    private $_configurableProductsProvider;
+    protected $_configurableProductsProvider;
 
     /**
-     * @param \Faonni\SmartCategoryConfigurable\Model\ConfigurableProductsProvider $configurableProductsProvider
+     * Initialize plugin
+     * 	
+     * @param ConfigurableProductsProvider $configurableProductsProvider
      */
     public function __construct(
         ConfigurableProductsProvider $configurableProductsProvider

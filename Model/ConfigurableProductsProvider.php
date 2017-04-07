@@ -15,7 +15,7 @@
  * Do not edit or add to this file if you wish to upgrade module to newer
  * versions in the future.
  * 
- * @package     SmartCategoryConfigurable
+ * @package     Faonni_SmartCategoryConfigurable
  * @copyright   Copyright (c) 2017 Karliuka Vitalii(karliuka.vitalii@gmail.com) 
  * @license     http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
  */
@@ -28,24 +28,30 @@ use Magento\Catalog\Model\Product;
 use Magento\Catalog\Model\Config;
 
 /**
- * Faonni_SmartCategory ConfigurableProductsProvider
+ * Faonni_SmartCategory ConfigurableProducts Provider
  */
 class ConfigurableProductsProvider
 {
     /** 
+     * Resource Connection
+     * 	
      * @var \Magento\Framework\App\ResourceConnection 
      */
-    private $_resource;
+    protected $_resource;
     
     /**
+     * Config model
+     *	
      * @var \Magento\Catalog\Model\Config
      */
     protected $_config;    
 
     /**
+     * Product Ids
+     *	
      * @var array
      */
-    private $_productIds = [];
+    protected $_productIds = [];
     
     /**
      * Catalog product visibility
@@ -55,9 +61,11 @@ class ConfigurableProductsProvider
     protected $_catalogProductVisibility;   
     
     /**
-     * @param \Magento\Framework\App\ResourceConnection $resource
-     * @param \Magento\Catalog\Model\Product\Visibility $catalogProductVisibility 
-     * @param \Magento\Catalog\Model\Config $config
+     * Initialize provider
+     * 	
+     * @param ResourceConnection $resource
+     * @param Visibility $catalogProductVisibility 
+     * @param Config $config
      */
     public function __construct(
 		ResourceConnection $resource,
