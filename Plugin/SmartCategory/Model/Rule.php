@@ -4,15 +4,15 @@
  * 
  * See COPYING.txt for license details.
  */
-namespace Faonni\SmartCategoryConfigurable\Model\Plugin;
+namespace Faonni\SmartCategoryConfigurable\Plugin\SmartCategory\Model;
 
 use Faonni\SmartCategory\Model\Rule;
 use Faonni\SmartCategoryConfigurable\Model\ConfigurableProductsProvider;
 
 /**
- * Replace configurable sub products 
+ * Rule Plugin
  */
-class ConfigurableProductHandler
+class Rule
 {
     /** 
      * ConfigurableProducts Provider
@@ -22,7 +22,7 @@ class ConfigurableProductHandler
     protected $_configurableProductsProvider;
 
     /**
-     * Initialize plugin
+     * Initialize Plugin
      * 	
      * @param ConfigurableProductsProvider $configurableProductsProvider
      */
@@ -33,10 +33,11 @@ class ConfigurableProductHandler
     }
 
     /**
-     * @param \Faonni\SmartCategory\Model\Rule $rule
+     * Get Array of Product ids Which are Matched by Rule
+     *
+     * @param Rule $rule
      * @param array $productIds
      * @return array
-     * @SuppressWarnings(PHPMD.UnusedFormalParameter)
      */
     public function afterGetMatchingProductIds(Rule $rule, array $productIds)
     {

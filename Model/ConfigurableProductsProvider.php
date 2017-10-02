@@ -13,7 +13,7 @@ use Magento\Catalog\Model\Product;
 use Magento\Catalog\Model\Config;
 
 /**
- * Faonni_SmartCategory ConfigurableProducts Provider
+ * ConfigurableProducts Provider
  */
 class ConfigurableProductsProvider
 {
@@ -25,7 +25,7 @@ class ConfigurableProductsProvider
     protected $_resource;
     
     /**
-     * Config model
+     * Config Model
      *	
      * @var \Magento\Catalog\Model\Config
      */
@@ -39,14 +39,14 @@ class ConfigurableProductsProvider
     protected $_productIds = [];
     
     /**
-     * Catalog product visibility
+     * Catalog Product Visibility
      *
      * @var \Magento\Catalog\Model\Product\Visibility
      */
     protected $_catalogProductVisibility;   
     
     /**
-     * Initialize provider
+     * Initialize Provider
      * 	
      * @param ResourceConnection $resource
      * @param Visibility $catalogProductVisibility 
@@ -63,7 +63,7 @@ class ConfigurableProductsProvider
     }
 
     /**
-     * Retrieve display products pairs ids
+     * Retrieve Display Products Pairs Ids
      * 
      * @param array $ids
      * @return array
@@ -124,7 +124,7 @@ class ConfigurableProductsProvider
     }
 	
     /**
-     * Retrieve visibility attribute id
+     * Retrieve Visibility Attribute Id
      * 
      * @return int
      */

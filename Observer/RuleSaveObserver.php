@@ -10,12 +10,12 @@ use Magento\Framework\Event\Observer;
 use Magento\Framework\Event\ObserverInterface;
 
 /**
- * Rule save observer
+ * Rule Save Observer
  */
 class RuleSaveObserver implements ObserverInterface
 {	
     /**
-     * Handler for rule save event
+     * Handler for Rule Save Event
      *
      * @param Observer $observer
      * @return void
@@ -26,7 +26,6 @@ class RuleSaveObserver implements ObserverInterface
 		$rule->setReplaceOnConfigurable(
 			$rule->getCategory()->getReplaceOnConfigurable()
 		);
-        return $this;
     }
 }  
  

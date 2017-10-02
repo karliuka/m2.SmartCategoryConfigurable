@@ -10,12 +10,12 @@ use Magento\Framework\Event\Observer;
 use Magento\Framework\Event\ObserverInterface;
 
 /**
- * Product match observer
+ * Product Match Observer
  */
 class ProductMatchObserver implements ObserverInterface
 {	
     /**
-     * Handler for product match event
+     * Handler for Product Match Event
      *
      * @param Observer $observer
      * @return void
@@ -28,6 +28,5 @@ class ProductMatchObserver implements ObserverInterface
 		if ($object->getReplaceOnConfigurable()) {
 			$rule->setVisibilityFilter(false);			
 		}
-        return $this;
     }
 }  

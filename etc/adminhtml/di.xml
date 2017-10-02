@@ -7,8 +7,11 @@
  */
 -->
 <config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-        xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+	<!--
+	plugin
+	-->	    
     <type name="Faonni\SmartCategory\Model\Rule">
-        <plugin name="addVariationsToProductRule" type="Faonni\SmartCategoryConfigurable\Model\Plugin\ConfigurableProductHandler"/>
+        <plugin name="faonni_smartcategoryconfigurable" type="Faonni\SmartCategoryConfigurable\Plugin\SmartCategory\Model\Rule"/>
     </type>
 </config>

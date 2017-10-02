@@ -12,12 +12,12 @@ use Magento\Framework\Setup\SchemaSetupInterface;
 use Magento\Framework\DB\Ddl\Table;
 
 /**
- * Faonni_SmartCategoryConfigurable UpgradeSchema
+ * SmartCategoryConfigurable Upgrade Schema
  */
 class UpgradeSchema implements UpgradeSchemaInterface
 {
     /**
-     * Upgrades DB schema for a module Faonni_SmartCategoryConfigurable
+     * Upgrades DB Schema for a Module Faonni_SmartCategoryConfigurable
      *
      * @param SchemaSetupInterface $setup
      * @param ModuleContextInterface $context

@@ -15,7 +15,7 @@ use Magento\Eav\Model\Entity\Attribute\ScopedAttributeInterface;
 use Magento\Catalog\Model\Category;
 
 /**
- * Faonni_SmartCategoryConfigurable UpgradeSchema
+ * SmartCategoryConfigurable Upgrade Data
  */
 class UpgradeData implements UpgradeDataInterface
 {
@@ -38,7 +38,7 @@ class UpgradeData implements UpgradeDataInterface
     }
 
     /**
-     * Upgrades data for a module Faonni_SmartCategoryConfigurable
+     * Upgrades DB Data for a Module Faonni_SmartCategoryConfigurable
      *
      * @param ModuleDataSetupInterface $setup
      * @param ModuleContextInterface $context
