@@ -6,7 +6,7 @@
  */
 namespace Faonni\SmartCategoryConfigurable\Plugin\SmartCategory\Model;
 
-use Faonni\SmartCategory\Model\Rule;
+use Faonni\SmartCategory\Model\Rule as SmartCategoryRule;
 use Faonni\SmartCategoryConfigurable\Model\ConfigurableProductsProvider;
 
 /**
@@ -35,11 +35,11 @@ class Rule
     /**
      * Get Array of Product ids Which are Matched by Rule
      *
-     * @param Rule $rule
+     * @param SmartCategoryRule $rule
      * @param array $productIds
      * @return array
      */
-    public function afterGetMatchingProductIds(Rule $rule, array $productIds)
+    public function afterGetMatchingProductIds(SmartCategoryRule $rule, array $productIds)
     {
         $object = $rule->getCategory() ?: $rule;
 		if (!$object->getReplaceOnConfigurable()) {
