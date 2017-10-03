@@ -1,33 +1,18 @@
 <?php
 /**
- * Faonni
- *  
- * NOTICE OF LICENSE
- *
- * This source file is subject to the Open Software License (OSL 3.0)
- * that is bundled with this package in the file LICENSE.txt.
- * It is also available through the world-wide-web at this URL:
- * http://opensource.org/licenses/osl-3.0.php
- *
- *
- * DISCLAIMER
- *
- * Do not edit or add to this file if you wish to upgrade module to newer
- * versions in the future.
+ * Copyright © 2011-2017 Karliuka Vitalii(karliuka.vitalii@gmail.com)
  * 
- * @package     SmartCategoryConfigurable
- * @copyright   Copyright (c) 2017 Karliuka Vitalii(karliuka.vitalii@gmail.com) 
- * @license     http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
+ * See COPYING.txt for license details.
  */
-namespace Faonni\SmartCategoryConfigurable\Model\Plugin;
+namespace Faonni\SmartCategoryConfigurable\Plugin\SmartCategory\Model;
 
-use Faonni\SmartCategory\Model\Rule;
+use Faonni\SmartCategory\Model\Rule as SmartCategoryRule;
 use Faonni\SmartCategoryConfigurable\Model\ConfigurableProductsProvider;
 
 /**
- * Replace configurable sub products 
+ * Rule Plugin
  */
-class ConfigurableProductHandler
+class Rule
 {
     /** 
      * ConfigurableProducts Provider
@@ -37,7 +22,7 @@ class ConfigurableProductHandler
     protected $_configurableProductsProvider;
 
     /**
-     * Initialize plugin
+     * Initialize Plugin
      * 	
      * @param ConfigurableProductsProvider $configurableProductsProvider
      */
@@ -48,12 +33,13 @@ class ConfigurableProductHandler
     }
 
     /**
-     * @param \Faonni\SmartCategory\Model\Rule $rule
+     * Get Array of Product ids Which are Matched by Rule
+     *
+     * @param SmartCategoryRule $rule
      * @param array $productIds
      * @return array
-     * @SuppressWarnings(PHPMD.UnusedFormalParameter)
      */
-    public function afterGetMatchingProductIds(Rule $rule, array $productIds)
+    public function afterGetMatchingProductIds(SmartCategoryRule $rule, array $productIds)
     {
         $object = $rule->getCategory() ?: $rule;
 		if (!$object->getReplaceOnConfigurable()) {
