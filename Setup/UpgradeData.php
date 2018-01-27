@@ -9,7 +9,6 @@ namespace Faonni\SmartCategoryConfigurable\Setup;
 use Magento\Framework\Setup\UpgradeDataInterface;
 use Magento\Framework\Setup\ModuleContextInterface;
 use Magento\Framework\Setup\ModuleDataSetupInterface;
-use Magento\Eav\Setup\EavSetup;
 use Magento\Eav\Setup\EavSetupFactory;
 use Magento\Eav\Model\Entity\Attribute\ScopedAttributeInterface;
 use Magento\Catalog\Model\Category;
@@ -20,9 +19,9 @@ use Magento\Catalog\Model\Category;
 class UpgradeData implements UpgradeDataInterface
 {
     /**
-     * EAV setup factory
+     * EAV Setup Factory
      *
-     * @var EavSetupFactory
+     * @var \Magento\Eav\Setup\EavSetupFactory
      */
     private $_eavSetupFactory;
 
@@ -63,7 +62,7 @@ class UpgradeData implements UpgradeDataInterface
      */
     private function addReplaceOnConfigurableAttribute(ModuleDataSetupInterface $setup)
     {
-        /** @var EavSetup $eavSetup */
+        /** @var \Magento\Eav\Setup\EavSetup $eavSetup */
         $eavSetup = $this->_eavSetupFactory->create(['setup' => $setup]);        
         $eavSetup->addAttribute(
             Category::ENTITY,
