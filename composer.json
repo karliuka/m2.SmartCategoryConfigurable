@@ -11,7 +11,6 @@
 		"OSL-3.0"
 	],
 	"require": {
-		"php": "~5.6.0|~7.0.0|~7.1.0",
 		"magento/module-configurable-product": "100.1.*|100.2.*",
 		"faonni/module-smart-category": "2.1.*|2.2.*"
 	},
