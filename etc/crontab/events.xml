@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Copyright © 2011-2018 Karliuka Vitalii(karliuka.vitalii@gmail.com)
+ * 
+ * See COPYING.txt for license details.
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	xsi:noNamespaceSchemaLocation="urn:magento:framework:Event/etc/events.xsd">
+	<!--
+	event faonni_smartcategory_product_collection_match_before
+	-->	    
+    <event name="faonni_smartcategory_product_collection_match_before">
+        <observer name="faonni_smart_category_configurable" instance="Faonni\SmartCategoryConfigurable\Observer\ProductMatchObserver" />
+    </event>
+	<!--
+	event faonni_smartcategory_rule_save_before
+	-->	    
+    <event name="faonni_smartcategory_rule_save_before">
+        <observer name="faonni_smart_category_configurable" instance="Faonni\SmartCategoryConfigurable\Observer\RuleSaveObserver" />
+    </event>    
+</config>
