@@ -1,7 +1,7 @@
 <?php
 /**
  * Copyright © 2011-2018 Karliuka Vitalii(karliuka.vitalii@gmail.com)
- * 
+ *
  * See COPYING.txt for license details.
  */
 namespace Faonni\SmartCategoryConfigurable\Observer;
@@ -13,7 +13,7 @@ use Magento\Framework\Event\ObserverInterface;
  * Product Match Observer
  */
 class ProductMatchObserver implements ObserverInterface
-{	
+{
     /**
      * Handler for Product Match Event
      *
@@ -21,12 +21,12 @@ class ProductMatchObserver implements ObserverInterface
      * @return void
      */
     public function execute(Observer $observer)
-    {		
-		$rule = $observer->getEvent()->getRule();
-		$object = $rule->getCategory() ?: $rule;
-		
-		if ($object->getReplaceOnConfigurable()) {
-			$rule->setVisibilityFilter(false);			
-		}
+    {
+        $rule = $observer->getEvent()->getRule();
+        $object = $rule->getCategory() ?: $rule;
+
+        if ($object->getReplaceOnConfigurable()) {
+            $rule->setVisibilityFilter(false);
+        }
     }
-}  
+}

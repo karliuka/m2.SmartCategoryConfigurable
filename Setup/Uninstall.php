@@ -1,7 +1,7 @@
 <?php
 /**
  * Copyright © 2011-2018 Karliuka Vitalii(karliuka.vitalii@gmail.com)
- * 
+ *
  * See COPYING.txt for license details.
  */
 namespace Faonni\SmartCategoryConfigurable\Setup;
@@ -13,30 +13,30 @@ use Magento\Eav\Setup\EavSetupFactory;
 use Magento\Catalog\Model\Category;
 
 /**
- * SmartCategoryConfigurable Uninstall
+ * Uninstall
  */
 class Uninstall implements UninstallInterface
 {
     /**
-     * EAV Setup Factory
+     * EAV setup factory
      *
      * @var \Magento\Eav\Setup\EavSetupFactory
      */
     private $_eavSetupFactory;
 
     /**
-     * Initialize Setup
+     * Initialize setup
      *
      * @param EavSetupFactory $eavSetupFactory
      */
     public function __construct(
-		EavSetupFactory $eavSetupFactory
-	) {
+        EavSetupFactory $eavSetupFactory
+    ) {
         $this->_eavSetupFactory = $eavSetupFactory;
     }
-    
+
     /**
-     * Uninstall DB Schema for a Module SmartCategoryConfigurable
+     * Uninstall DB schema
      *
      * @param SchemaSetupInterface $setup
      * @param ModuleContextInterface $context
@@ -46,8 +46,8 @@ class Uninstall implements UninstallInterface
     {
         $setup->startSetup();
 
-        $this->removeAttributes();	
-		
+        $this->removeAttributes();
+
         $setup->endSetup();
     }
 
@@ -60,9 +60,9 @@ class Uninstall implements UninstallInterface
     {
         $attributes = ['replace_on_configurable'];
         /** @var \Magento\Eav\Setup\EavSetup $eavSetup */
-        $eavSetup = $this->_eavSetupFactory->create();         
+        $eavSetup = $this->_eavSetupFactory->create();
         foreach ($attributes as $attribute) {
-			$eavSetup->removeAttribute(Category::ENTITY, $attribute); 	
+            $eavSetup->removeAttribute(Category::ENTITY, $attribute);
         }
-    }    
+    }
 }

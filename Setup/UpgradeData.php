@@ -1,7 +1,7 @@
 <?php
 /**
  * Copyright © 2011-2018 Karliuka Vitalii(karliuka.vitalii@gmail.com)
- * 
+ *
  * See COPYING.txt for license details.
  */
 namespace Faonni\SmartCategoryConfigurable\Setup;
@@ -11,33 +11,34 @@ use Magento\Framework\Setup\ModuleContextInterface;
 use Magento\Framework\Setup\ModuleDataSetupInterface;
 use Magento\Eav\Setup\EavSetupFactory;
 use Magento\Eav\Model\Entity\Attribute\ScopedAttributeInterface;
+use Magento\Eav\Model\Entity\Attribute\Source\Boolean;
 use Magento\Catalog\Model\Category;
 
 /**
- * SmartCategoryConfigurable Upgrade Data
+ * Upgrade data
  */
 class UpgradeData implements UpgradeDataInterface
 {
     /**
-     * EAV Setup Factory
+     * EAV setup factory
      *
      * @var \Magento\Eav\Setup\EavSetupFactory
      */
     private $_eavSetupFactory;
 
     /**
-     * Init
+     *  Initialize setup
      *
      * @param EavSetupFactory $eavSetupFactory
      */
     public function __construct(
-		EavSetupFactory $eavSetupFactory
-	) {
+        EavSetupFactory $eavSetupFactory
+    ) {
         $this->_eavSetupFactory = $eavSetupFactory;
     }
 
     /**
-     * Upgrades DB Data for a Module Faonni_SmartCategoryConfigurable
+     * Upgrades DB data
      *
      * @param ModuleDataSetupInterface $setup
      * @param ModuleContextInterface $context
@@ -46,39 +47,39 @@ class UpgradeData implements UpgradeDataInterface
     public function upgrade(ModuleDataSetupInterface $setup, ModuleContextInterface $context)
     {
         $setup->startSetup();
-        
+
         if (version_compare($context->getVersion(), '2.0.4', '<')) {
             $this->addReplaceOnConfigurableAttribute($setup);
-        }        
-             
-        $setup->endSetup();  
-	}
+        }
+
+        $setup->endSetup();
+    }
 
     /**
-     * Add Replace on Configurable Attribute
-	 *
+     * Add replace on configurable attribute
+     *
      * @param ModuleDataSetupInterface $setup
      * @return void
      */
     private function addReplaceOnConfigurableAttribute(ModuleDataSetupInterface $setup)
     {
         /** @var \Magento\Eav\Setup\EavSetup $eavSetup */
-        $eavSetup = $this->_eavSetupFactory->create(['setup' => $setup]);        
+        $eavSetup = $this->_eavSetupFactory->create(['setup' => $setup]);
         $eavSetup->addAttribute(
             Category::ENTITY,
             'replace_on_configurable',
             [
-				'type' => 'int',
-				'label' => 'Replace on Configurable',
-				'input' => 'select',
-				'source' => 'Magento\Eav\Model\Entity\Attribute\Source\Boolean',
-				'global' => ScopedAttributeInterface::SCOPE_GLOBAL,
-				'required' => false,
-				'sort_order' => 20,
-				'default' => '1',				
-				'group' => 'Products in Category',
-				'note' => 'Replace the associated products (Not Visible Individually) on corresponding configurable product',
+                'type' => 'int',
+                'label' => 'Replace on Configurable',
+                'input' => 'select',
+                'source' => Boolean::class,
+                'global' => ScopedAttributeInterface::SCOPE_GLOBAL,
+                'required' => false,
+                'sort_order' => 20,
+                'default' => '1',
+                'group' => 'Products in Category',
+                'note' => 'Replace the associated products (Not Visible Individually) on corresponding configurable product',
             ]
-        );  
-    }	
+        );
+    }
 }

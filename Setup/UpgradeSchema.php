@@ -1,7 +1,7 @@
 <?php
 /**
  * Copyright © 2011-2018 Karliuka Vitalii(karliuka.vitalii@gmail.com)
- * 
+ *
  * See COPYING.txt for license details.
  */
 namespace Faonni\SmartCategoryConfigurable\Setup;
@@ -36,7 +36,7 @@ class UpgradeSchema implements UpgradeSchemaInterface
 
     /**
      * Add replace on configurable column
-	 *
+     *
      * @param SchemaSetupInterface $setup
      * @return void
      */
