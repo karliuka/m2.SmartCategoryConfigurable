@@ -12,12 +12,12 @@ use Magento\Framework\Setup\SchemaSetupInterface;
 use Magento\Framework\DB\Ddl\Table;
 
 /**
- * SmartCategoryConfigurable Upgrade Schema
+ * Upgrade schema
  */
 class UpgradeSchema implements UpgradeSchemaInterface
 {
     /**
-     * Upgrades DB Schema for a Module Faonni_SmartCategoryConfigurable
+     * Upgrades DB schema
      *
      * @param SchemaSetupInterface $setup
      * @param ModuleContextInterface $context
@@ -35,7 +35,7 @@ class UpgradeSchema implements UpgradeSchemaInterface
     }
 
     /**
-     * Add Replace on Configurable Column
+     * Add replace on configurable column
 	 *
      * @param SchemaSetupInterface $setup
      * @return void
@@ -43,7 +43,7 @@ class UpgradeSchema implements UpgradeSchemaInterface
     private function addReplaceOnConfigurableColumn(SchemaSetupInterface $setup)
     {
         $setup->getConnection()->addColumn(
-            'faonni_smartcategory_rule',
+            $setup->getTable('faonni_smartcategory_rule'),
             'replace_on_configurable',
             [
                 'type' => Table::TYPE_SMALLINT,
