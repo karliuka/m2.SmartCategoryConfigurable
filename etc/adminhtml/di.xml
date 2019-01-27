@@ -8,9 +8,9 @@
 -->
 <config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
-	<!--
-	plugin
-	-->	    
+    <!--
+    plugin
+    -->
     <type name="Faonni\SmartCategory\Model\Rule">
         <plugin name="faonni_smartcategoryconfigurable" type="Faonni\SmartCategoryConfigurable\Plugin\SmartCategory\Model\Rule"/>
     </type>

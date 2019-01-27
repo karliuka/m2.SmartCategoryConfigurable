@@ -13,57 +13,57 @@ use Magento\Catalog\Model\Product;
 use Magento\Catalog\Model\Config;
 
 /**
- * ConfigurableProducts Provider
+ * ConfigurableProducts provider
  */
 class ConfigurableProductsProvider
 {
     /**
-     * Resource Connection
+     * Resource connection
      *
      * @var \Magento\Framework\App\ResourceConnection
      */
     protected $_resource;
 
     /**
-     * Config Model
+     * Config model
      *
      * @var \Magento\Catalog\Model\Config
      */
     protected $_config;
 
     /**
-     * Product Ids
+     * Product ids
      *
      * @var array
      */
     protected $_productIds = [];
 
     /**
-     * Catalog Product Visibility
+     * Catalog product visibility
      *
      * @var \Magento\Catalog\Model\Product\Visibility
      */
-    protected $_catalogProductVisibility;
+    protected $_visibility;
 
     /**
-     * Initialize Provider
+     * Initialize provider
      *
      * @param ResourceConnection $resource
-     * @param Visibility $catalogProductVisibility
+     * @param Visibility $visibility
      * @param Config $config
      */
     public function __construct(
         ResourceConnection $resource,
-        Visibility $catalogProductVisibility,
+        Visibility $visibility,
         Config $config
     ) {
         $this->_resource = $resource;
-        $this->_catalogProductVisibility = $catalogProductVisibility;
+        $this->_visibility = $visibility;
         $this->_config = $config;
     }
 
     /**
-     * Retrieve Display Products Pairs Ids
+     * Retrieve display products pairs ids
      *
      * @param array $ids
      * @return array
@@ -77,7 +77,10 @@ class ConfigurableProductsProvider
                 ->select()
                 ->from(
                     ['e' => $this->_resource->getTableName('catalog_product_entity')],
-                    ['e.entity_id', 'display_id' => new \Zend_Db_Expr('IF(c.value_id, p.entity_id, IF(s.entity_id, 0, NULL))')]
+                    [
+                        'e.entity_id',
+                        'display_id' => new \Zend_Db_Expr('IF(c.value_id, p.entity_id, IF(s.entity_id, 0, NULL))')
+                    ]
                 )
                 ->joinLeft(
                     ['l' => $this->_resource->getTableName('catalog_product_super_link')],
@@ -98,7 +101,7 @@ class ConfigurableProductsProvider
                             'c.store_id = "0"',
                             $connection->quoteInto('p.type_id = ?', Configurable::TYPE_CODE),
                             $connection->quoteInto('c.attribute_id = ?', $this->getVisibilityAttributeId()),
-                            $connection->quoteInto('c.value IN(?)', $this->_catalogProductVisibility->getVisibleInSiteIds())
+                            $connection->quoteInto('c.value IN(?)', $this->_visibility->getVisibleInSiteIds())
                         ]
                     ),
                     []
@@ -112,7 +115,7 @@ class ConfigurableProductsProvider
                             's.entity_id = e.entity_id',
                             's.store_id = "0"',
                             $connection->quoteInto('s.attribute_id = ?', $this->getVisibilityAttributeId()),
-                            $connection->quoteInto('s.value IN(?)', $this->_catalogProductVisibility->getVisibleInSiteIds())
+                            $connection->quoteInto('s.value IN(?)', $this->_visibility->getVisibleInSiteIds())
                         ]
                     ),
                     []
