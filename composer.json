@@ -10,10 +10,6 @@
 	"license": [
 		"OSL-3.0"
 	],
-	"require": {
-		"magento/module-configurable-product": "100.1.*|100.2.*",
-		"faonni/module-smart-category": "2.1.*|2.2.*"
-	},
 	"autoload": {
 		"files": [ 
 			"registration.php" 
