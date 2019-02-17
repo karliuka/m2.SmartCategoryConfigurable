@@ -6,7 +6,7 @@ SmartCategory functionality from Configurable products. Extension has a dependen
 
 ## Compatibility
 
-Magento CE 2.1.x, 2.2.x
+Magento CE 2.1.x, 2.2.x, 2.3.x
 
 ## Install
 
