@@ -3,10 +3,12 @@
     "description": "SmartCategory functionality from configurable products.",
     "type": "magento2-module",
     "version": "2.3.1",
-    "authors": [{
-        "name" : "Karliuka Vitalii",
-        "email": "karliuka.vitalii@gmail.com"
-    }],
+    "authors": [
+        {
+            "name": "Karliuka Vitalii",
+            "email": "karliuka.vitalii@gmail.com"
+        }
+    ],
     "license": [
         "OSL-3.0"
     ],
@@ -15,8 +17,8 @@
         "faonni/module-smart-category": "2.3.*"
     },
     "autoload": {
-        "files": [ 
-            "registration.php" 
+        "files": [
+            "registration.php"
         ],
         "psr-4": {
             "Faonni\\SmartCategoryConfigurable\\": ""

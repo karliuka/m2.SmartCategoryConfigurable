@@ -11,7 +11,7 @@ use Magento\Framework\Setup\SchemaSetupInterface;
 use Magento\Framework\DB\Ddl\Table;
 
 /**
- * Upgrade schema
+ * Upgrade db schema
  */
 class UpgradeSchema implements UpgradeSchemaInterface
 {

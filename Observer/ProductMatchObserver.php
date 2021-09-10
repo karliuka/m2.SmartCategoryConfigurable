@@ -9,7 +9,7 @@ use Magento\Framework\Event\Observer;
 use Magento\Framework\Event\ObserverInterface;
 
 /**
- * Product Match Observer
+ * Product match
  */
 class ProductMatchObserver implements ObserverInterface
 {
@@ -21,7 +21,7 @@ class ProductMatchObserver implements ObserverInterface
      */
     public function execute(Observer $observer)
     {
-        $rule = $observer->getEvent()->getRule();
+        $rule = $observer->getEvent()->getData('rule');
         $object = $rule->getCategory() ?: $rule;
 
         if ($object->getReplaceOnConfigurable()) {
