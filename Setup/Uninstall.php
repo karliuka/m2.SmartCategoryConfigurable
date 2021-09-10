@@ -12,7 +12,7 @@ use Magento\Eav\Setup\EavSetupFactory;
 use Magento\Catalog\Model\Category;
 
 /**
- * Uninstall
+ * Uninstall schema
  */
 class Uninstall implements UninstallInterface
 {
@@ -58,7 +58,6 @@ class Uninstall implements UninstallInterface
     private function removeAttributes()
     {
         $attributes = ['replace_on_configurable'];
-        /** @var \Magento\Eav\Setup\EavSetup $eavSetup */
         $eavSetup = $this->_eavSetupFactory->create();
         foreach ($attributes as $attribute) {
             $eavSetup->removeAttribute(Category::ENTITY, $attribute);

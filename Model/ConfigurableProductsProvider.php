@@ -10,9 +10,10 @@ use Magento\ConfigurableProduct\Model\Product\Type\Configurable;
 use Magento\Catalog\Model\Product\Visibility;
 use Magento\Catalog\Model\Product;
 use Magento\Catalog\Model\Config;
+use Zend_Db_Expr;
 
 /**
- * ConfigurableProducts provider
+ * configurable Products data provider
  */
 class ConfigurableProductsProvider
 {
@@ -33,7 +34,7 @@ class ConfigurableProductsProvider
     /**
      * Product ids
      *
-     * @var array
+     * @var mixed[]
      */
     protected $_productIds = [];
 
@@ -64,12 +65,12 @@ class ConfigurableProductsProvider
     /**
      * Retrieve display products pairs ids
      *
-     * @param array $ids
-     * @return array
+     * @param int[] $ids
+     * @return int[]
      */
     public function getDisplayIds(array $ids)
     {
-        $key = md5(json_encode($ids));
+        $key = hash('sha256', (string)json_encode($ids));
         if (!isset($this->_productIds[$key])) {
             $connection = $this->_resource->getConnection();
             $select = $connection
@@ -78,7 +79,7 @@ class ConfigurableProductsProvider
                     ['e' => $this->_resource->getTableName('catalog_product_entity')],
                     [
                         'e.entity_id',
-                        'display_id' => new \Zend_Db_Expr('IF(c.value_id, p.entity_id, IF(s.entity_id, 0, NULL))')
+                        'display_id' => new Zend_Db_Expr('IF(c.value_id, p.entity_id, IF(s.entity_id, 0, NULL))')
                     ]
                 )
                 ->joinLeft(
@@ -110,7 +111,7 @@ class ConfigurableProductsProvider
                     join(
                         ' AND ',
                         [
-                            new \Zend_Db_Expr('c.value_id IS NULL'),
+                            new Zend_Db_Expr('c.value_id IS NULL'),
                             's.entity_id = e.entity_id',
                             's.store_id = "0"',
                             $connection->quoteInto('s.attribute_id = ?', $this->getVisibilityAttributeId()),
