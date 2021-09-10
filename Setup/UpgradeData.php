@@ -14,7 +14,7 @@ use Magento\Eav\Model\Entity\Attribute\Source\Boolean;
 use Magento\Catalog\Model\Category;
 
 /**
- * Upgrade data
+ * Upgrade data schema
  */
 class UpgradeData implements UpgradeDataInterface
 {
@@ -62,6 +62,7 @@ class UpgradeData implements UpgradeDataInterface
      */
     private function addReplaceOnConfigurableAttribute(ModuleDataSetupInterface $setup)
     {
+        $note = 'Replace the associated products (Not Visible Individually) on corresponding configurable product';
         /** @var \Magento\Eav\Setup\EavSetup $eavSetup */
         $eavSetup = $this->_eavSetupFactory->create(['setup' => $setup]);
         $eavSetup->addAttribute(
@@ -77,7 +78,7 @@ class UpgradeData implements UpgradeDataInterface
                 'sort_order' => 20,
                 'default' => '1',
                 'group' => 'Products in Category',
-                'note' => 'Replace the associated products (Not Visible Individually) on corresponding configurable product',
+                'note' => $note
             ]
         );
     }

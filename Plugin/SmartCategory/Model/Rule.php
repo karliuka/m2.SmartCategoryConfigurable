@@ -35,8 +35,8 @@ class Rule
      * Get Array of Product ids Which are Matched by Rule
      *
      * @param SmartCategoryRule $rule
-     * @param array $productIds
-     * @return array
+     * @param int[] $productIds
+     * @return int[]
      */
     public function afterGetMatchingProductIds(SmartCategoryRule $rule, array $productIds)
     {

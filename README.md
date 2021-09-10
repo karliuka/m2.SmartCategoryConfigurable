@@ -16,9 +16,9 @@ Before installing, you must first install the module [Smart Category](https://gi
 
 Install the module [Smart Category](https://github.com/karliuka/m2.SmartCategory).  The corresponding version of the Smart Category Configurable will be installed automatically.
 
-   
+
 #### Manual Installation
-   
+
 1. Create a folder {Magento root}/app/code/Faonni/SmartCategoryConfigurable
 
 2. Download the corresponding [latest version](https://github.com/karliuka/m2.SmartCategoryConfigurable/releases)
