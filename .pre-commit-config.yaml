@@ -12,9 +12,11 @@ repos:
     -   id: pretty-format-json
         args: ["--indent=4", "--autofix", "--no-sort-keys"]
 -   repo: https://github.com/eriocnemis/git.MagentoPreCommitHooks
-    rev: 1.0.7
+    rev: 1.0.10
     hooks:
+    -   id: magento-xml
     -   id: magento-phpcs
+        args: ["--autofix"]
     -   id: magento-phpmd
     -   id: magento-phpcpd
     -   id: magento-phpstan
